@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title>TheIdol</title>
+</head>
+
+<style>
+    .form-holder{
+        margin-top:20%;
+        margin-bottom:20%;
+    }
+
+    .form-group {
+        margin-bottom: 5px;
+    }
+</style>
+
+<body>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-4 offset-md-4">
+            <div class="card form-holder">
+                <div class="card-body">
+                    <h1>new booking</h1>
+                    <form id="booking" action="" method="post">
+                        <div class="form-group">
+                            <label>surname</label>
+                            <input type="text" name="" id="surname" class="form-control" placeholder="" required/>
+                        </div>
+                        <div class="form-group">
+                            <label>phone number</label>
+                            <input type="text" name="" id="phone-number" class="form-control" placeholder="" required/>
+                        </div>
+                        <div class="form-group">
+                            <label>party size</label>
+                            <input type="number" name="" id="party-size" class="form-control" placeholder="1" required/>
+                        </div>
+                        <div class="form-group">
+                            <label>booking date</label>
+                            <input type="text" name="" id="booking-date" class="form-control" placeholder="YYYY-MM-DD" required/>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-4 text-right">
+                                <input type="submit" class="btn btn-primary" value="submit" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+
+<script>
+
+    $( document ).ready(function() {
+
+        //intercept the form submit and send a post request manually
+        $("#booking").submit(function(e){
+            e.preventDefault();
+
+            //create the post body
+            let obj = {};
+            obj.surname = $('#surname').val();
+            obj.partySize = $('#party-size').val();
+            obj.phoneNumber = $('#phone-number').val();
+            obj.bookingDate = $('#booking-date').val();
+
+            //send the post request and output response
+            $.ajax({
+                type: "POST",
+                url: "booking/new",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: "text"
+            }).done(function(data){
+                alert(JSON.parse(data));
+            }).fail(function(errMsg) {
+                alert(JSON.parse(errMsg));
+            });
+        });
+
+    });
+
+</script>
+
+
+</body>
+</html>
