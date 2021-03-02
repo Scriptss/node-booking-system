@@ -3,10 +3,10 @@ var mysql = require('mysql');
 function startMySQL() {
     console.log("starting MySQL connection pool");
     pool = mysql.createPool({
-        host            : 'freedb.tech',
-        user            : 'freedbtech_callum',
-        password        : 'Abc123',
-        database        : 'freedbtech_theidol',
+        host            : '',
+        user            : '',
+        password        : '',
+        database        : '',
         queueLimit : 50, // big queue in case of mass bookingz
         connectionLimit : 10 // 10 so we dont overwhelm the MySQL server
     });
